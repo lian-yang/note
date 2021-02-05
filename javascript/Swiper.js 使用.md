@@ -22,14 +22,15 @@ const swiper = new Swiper("#swiper", {
             const slideLeft = slide.offsetLeft;
             const slideWidth = slide.clientWidth;
             const slideCenter = slideLeft + slideWidth / 2; // 被点击slide的中心点
-            this.setTranslate(300);
+            const speed = 100;
+            this.translateTo(300, speed);
             if (slideCenter < swiperWidth / 2) {
-                this.setTranslate(0);
+                this.translateTo(0, speed);
             } else if (slideCenter > maxWidth) {
-                this.setTranslate(maxTranslate);
+                this.translateTo(maxTranslate, speed);
             } else {
                 const nowTlanslate = slideCenter - swiperWidth / 2;
-                this.setTranslate(-nowTlanslate);
+                this.translateTo(-nowTlanslate, speed);
             }
             //$("#swiper .active").removeClass('active');
             //$("#swiper .swiper-slide").eq(this.clickedIndex).addClass('active');
