@@ -4,14 +4,19 @@
 
 **SELECT: 用于从数据库中选择数据**
 
+```mysql
 SELECT * FROM table_name;
+```
 
 **DISTINCT: 用于过滤掉重复的值并返回指定列的行**
 
+```mysql
 SELECT DISTINCT column_name;
+```
 
 **WHERE: 用于过滤记录/行**
 
+```mysql
 SELECT column1, column2 FROM table_name WHERE condition;
 
 SELECT * FROM table_name WHERE condition1 AND condition2;
@@ -23,24 +28,31 @@ SELECT * FROM table_name WHERE NOT condition;
 SELECT * FROM table_name WHERE condition1 AND (condition2 OR condition3);
 
 SELECT * FROM table_name WHERE EXISTS (SELECT column_name FROM table_name WHERE condition);
+```
 
 **ORDER BY: 用于结果集的排序，升序（ASC）或者降序（DESC）**
 
+```mysql
 SELECT * FROM table_name ORDER BY column;
 
 SELECT * FROM table_name ORDER BY column DESC;
 
 SELECT * FROM table_name ORDER BY column1 ASC, column2 DESC;
+```
 
 **SELECT TOP: 用于指定从表顶部返回的记录数**
 
+```mysql
 SELECT TOP number columns_names FROM table_name WHERE condition;
 
 SELECT TOP percent columns_names FROM table_name WHERE condition;
+```
 
 并非所有数据库系统都支持SELECT TOP。 MySQL 中是LIMIT子句
 
+```mysql
 SELECT column_names FROM table_name LIMIT offset, count;
+```
 
 **LIKE: 用于搜索列中的特定模式，WHERE 子句中使用的运算符**
 
@@ -48,7 +60,9 @@ SELECT column_names FROM table_name LIMIT offset, count;
 
 _ (underscore) 是一个表示单个字符通配符
 
+```mysql
 SELECT column_names FROM table_name WHERE column_name LIKE pattern;
+```
 
 LIKE ‘a%’ （查找任何以“a”开头的值）
 
@@ -66,26 +80,33 @@ LIKE ‘[a-c]%’（查找任何以“a”或“b”或“c”开头的值）
 
 本质上，IN运算符是多个OR条件的简写
 
+```mysql
 SELECT column_names FROM table_name WHERE column_name IN (value1, value2, …);
 
 SELECT column_names FROM table_name WHERE column_name IN (SELECT STATEMENT);
+```
 
 **BETWEEN: 用于过滤给定范围的值的运算符**
 
+```mysql
 SELECT column_names FROM table_name WHERE column_name BETWEEN value1 AND value2;
 
 SELECT * FROM Products WHERE (column_name BETWEEN value1 AND value2) AND NOT column_name2 IN (value3, value4);
 
 SELECT * FROM Products WHERE column_name BETWEEN #01/07/1999# AND #03/12/1999#;
+```
 
 **NULL: 代表一个字段没有值**
 
+```mysql
 SELECT * FROM table_name WHERE column_name IS NULL;
 
 SELECT * FROM table_name WHERE column_name IS NOT NULL;
+```
 
 **AS: 用于给表或者列分配别名**
 
+```mysql
 SELECT column_name AS alias_name FROM table_name;
 
 SELECT column_name FROM table_name AS alias_name;
@@ -93,6 +114,7 @@ SELECT column_name FROM table_name AS alias_name;
 SELECT column_name AS alias_name1, column_name2 AS alias_name2;
 
 SELECT column_name1, column_name2 + ‘, ‘ + column_name3 AS alias_name;
+```
 
 **UNION: 用于组合两个或者多个 SELECT 语句的结果集的运算符**
 
@@ -102,7 +124,9 @@ SELECT column_name1, column_name2 + ‘, ‘ + column_name3 AS alias_name;
 
 每个 SELECT 语句中的列也必须具有相同的顺序
 
+```mysql
 SELECT columns_names FROM table1 UNION SELECT column_name FROM table2;
+```
 
 UNION 仅允许选择不同的值, UNION ALL 允许重复
 
@@ -112,15 +136,21 @@ ANY 如果任何子查询值满足条件，则返回 true。
 
 ALL 如果所有子查询值都满足条件，则返回 true。
 
+```mysql
 SELECT columns_names FROM table1 WHERE column_name operator (ANY|ALL) (SELECT column_name FROM table_name WHERE condition);
+```
 
 **GROUP BY: 通常与聚合函数（COUNT，MAX，MIN，SUM，AVG）一起使用，用于将结果集分组为一列或多列**
 
+```mysql
 SELECT column_name1, COUNT(column_name2) FROM table_name WHERE condition GROUP BY column_name1 ORDER BY COUNT(column_name2) DESC;
+```
 
 **HAVING: HAVING 子句指定 SELECT 语句应仅返回聚合值满足指定条件的行。它被添加到 SQL 语言中，因为WHERE关键字不能与聚合函数一起使用。**
 
+```mysql
 SELECT COUNT(column_name1), column_name2 FROM table GROUP BY column_name2 HAVING COUNT(column_name1) > 5;
+```
 
 
 
@@ -128,21 +158,27 @@ SELECT COUNT(column_name1), column_name2 FROM table GROUP BY column_name2 HAVING
 
 **INSERT INTO: 用于在表中插入新记录/行**
 
+```mysql
 INSERT INTO table_name (column1, column2) VALUES (value1, value2);
 
 INSERT INTO table_name VALUES (value1, value2 …);
+```
 
 **UPDATE: 用于修改表中的现有记录/行**
 
+```mysql
 UPDATE table_name SET column1 = value1, column2 = value2 WHERE condition;
 
 UPDATE table_name SET column_name = value;
+```
 
 **DELETE: 用于删除表中的现有记录/行**
 
+```mysql
 DELETE FROM table_name WHERE condition;
 
 DELETE * FROM table_name;
+```
 
 
 
@@ -150,21 +186,29 @@ DELETE * FROM table_name;
 
 **COUNT: 返回出现次数**
 
+```mysql
 SELECT COUNT (DISTINCT column_name);
+```
 
 **MIN() and MAX(): 返回所选列的最小/最大值**
 
+```mysql
 SELECT MIN (column_names) FROM table_name WHERE condition;
 
 SELECT MAX (column_names) FROM table_name WHERE condition;
+```
 
 **AVG(): 返回数字列的平均值**
 
+```mysql
 SELECT AVG (column_name) FROM table_name WHERE condition;
+```
 
 **SUM(): 返回数值列的总和**
 
+```mysql
 SELECT SUM (column_name) FROM table_name WHERE condition;
+```
 
 
 
@@ -172,25 +216,35 @@ SELECT SUM (column_name) FROM table_name WHERE condition;
 
 **INNER JOIN: 内连接，返回在两张表中具有匹配值的记录**
 
+```mysql
 SELECT column_names FROM table1 INNER JOIN table2 ON table1.column_name=table2.column_name;
 
 SELECT table1.column_name1, table2.column_name2, table3.column_name3 FROM ((table1 INNER JOIN table2 ON relationship) INNER JOIN table3 ON relationship);
+```
 
 **LEFT (OUTER) JOIN: 左外连接，返回左表（table1）中的所有记录，以及右表中的匹配记录（table2）**
 
+```mysql
 SELECT column_names FROM table1 LEFT JOIN table2 ON table1.column_name=table2.column_name;
+```
 
 **RIGHT (OUTER) JOIN: 右外连接，返回右表（table2）中的所有记录，以及左表（table1）中匹配的记录**
 
+```mysql
 SELECT column_names FROM table1 RIGHT JOIN table2 ON table1.column_name=table2.column_name;
+```
 
 **FULL (OUTER) JOIN: 全外连接，全连接是左右外连接的并集. 连接表包含被连接的表的所有记录, 如果缺少匹配的记录, 以 NULL 填充。**
 
+```mysql
 SELECT column_names FROM table1 FULL OUTER JOIN table2 ON table1.column_name=table2.column_name;
+```
 
 **Self JOIN: 自连接，表自身连接**
 
+```mysql
 SELECT column_names FROM table1 T1, table1 T2 WHERE condition;
+```
 
 
 
@@ -198,15 +252,21 @@ SELECT column_names FROM table1 T1, table1 T2 WHERE condition;
 
 **CREATE: 创建视图**
 
+```mysql
 CREATE VIEW view_name AS SELECT column1, column2 FROM table_name WHERE condition;
+```
 
 **SELECT: 检索视图**
 
+```mysql
 SELECT * FROM view_name;
+```
 
 **DROP: 删除视图**
 
+```mysql
 DROP VIEW view_name;
+```
 
 
 
@@ -214,12 +274,19 @@ DROP VIEW view_name;
 
 **ADD: 添加字段**
 
+```mysql
 ALTER TABLE table_name ADD column_name column_definition;
+```
 
 **MODIFY: 修改字段数据类型**
 
+```mysql
 ALTER TABLE table_name MODIFY column_name column_type;
+```
 
 **DROP: 删除字段**
 
+```mysql
 ALTER TABLE table_name DROP COLUMN column_name;
+```
+
