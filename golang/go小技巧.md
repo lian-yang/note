@@ -104,3 +104,12 @@ ZB和YB都已经超出了uint64的表示范围
 
 **对** **defer** **延迟执行的函数，它的参数会在声明时候就会求出具体值，而不是在执行时才求值**
 
+
+```go
+// excel读取日期
+func ExcelDay2Time(day int) time.Time  {
+	return time.Date(1899, time.December, 30, 0, 0, 0, 0, time.UTC).
+		Add(time.Second * time.Duration(day * 86400))
+}
+```
+
